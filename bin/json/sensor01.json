@@ -1,0 +1,11 @@
+{
+    "humidity": 11.2,
+    "temperature": 9.7,
+    "conductivity": 74,
+    "PH": 0.0,
+    "nitrogen": 2,
+    "phosphorus": 100,
+    "potassium": 61,
+    "out_temperature": 1.0,
+    "out_humidity": 67.0
+}
