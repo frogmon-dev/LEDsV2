@@ -21,7 +21,7 @@ pos = matrix.width  # 텍스트 시작 위치 (오른쪽 끝)
 message = "안녕하세요!"
 
 # PNG 이미지 불러오기
-image_path = "/home/pi/LEDsV2/bin/images/humi.png"  # 사용할 이미지 경로
+image_path = "/home/pi/LEDsV2/bin/images/temp.png"  # 사용할 이미지 경로
 image = Image.open(image_path)
 # 이미지 크기를 매트릭스 크기에 맞춤
 image = image.resize((16, 16))  # 매트릭스 크기에 맞게 조정
@@ -30,7 +30,7 @@ image = image.convert('RGB')
 
 try:
     while True:
-        #matrix.Clear()  # 화면 초기화
+        matrix.Clear()  # 화면 초기화
         # 이미지를 매트릭스에 출력
         matrix.SetImage(image, 0, 0)  # 이미지 위치 (0, 0)
         
