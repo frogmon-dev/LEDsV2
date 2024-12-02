@@ -23,6 +23,10 @@ message = "안녕하세요!"
 # PNG 이미지 불러오기
 image_path = "/home/pi/LEDsV2/bin/images/eyes1.png"  # 사용할 이미지 경로
 image = Image.open(image_path)
+# 이미지 크기를 매트릭스 크기에 맞춤
+image = image.resize((64, 32))  # 매트릭스 크기에 맞게 조정
+# 이미지를 RGB 모드로 변환
+image = image.convert('RGB')
 
 try:
     while True:
