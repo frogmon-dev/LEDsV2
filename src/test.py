@@ -54,8 +54,13 @@ try:
         
         time.sleep(1)  # 50ms 대기
         dicData = GLOB.loadJsonFileToDic(COM.gJsonDir+sensor_id+'.json')
-        strTemp = '%2d°C' % dicData['temperature', 99]
-        strHumi = '%2d%%' % dicData['humidity', 0]        
+        if not dicData:  # 데이터가 비어 있는 경우
+            print("Error: No valid data found.")
+            strTemp = '--°C'
+            strHumi = '--%'
+        else:
+            strTemp = '%2d°C' % dicData.get('temperature', 99)
+            strHumi = '%2d%%' % dicData.get('humidity', 0)
         
 except KeyboardInterrupt:
     print("종료합니다.")
