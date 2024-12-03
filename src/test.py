@@ -51,8 +51,8 @@ try:
             strTemp = '--°C'
             strHumi = '--%'
         else:
-            strTemp = '%2d°C' % dicData.get('temperature', 99)
-            strHumi = '%2d%%' % dicData.get('humidity', 0)
+            strTemp = '%2d°C' % dicData.get('out_temperature', 99)
+            strHumi = '%2d%%' % dicData.get('out_humidity', 0)
                 
         GLOB.setUpdateTime()
         
