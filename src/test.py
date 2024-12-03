@@ -38,8 +38,8 @@ try:
         #len = graphics.DrawText(matrix, font, pos, 16, text_color, message)  # 텍스트 출력
         #pos -= 1  # 텍스트 이동 (왼쪽으로 스크롤)
         
-        if pos + len < 0:  # 텍스트가 화면에서 완전히 사라지면
-            pos = matrix.width  # 다시 오른쪽 끝으로 이동
+        #if pos + len < 0:  # 텍스트가 화면에서 완전히 사라지면
+        #    pos = matrix.width  # 다시 오른쪽 끝으로 이동
         
         time.sleep(0.05)  # 50ms 대기
 except KeyboardInterrupt:
