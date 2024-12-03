@@ -44,12 +44,22 @@ strTemp = '--°C'
 strHumi = '--%'
 try:
     while True:
+        
+        dicData = GLOB.loadJsonFileToDic(COM.gJsonDir+sensor_id+'.json')
+        if not dicData:  # 데이터가 비어 있는 경우
+            print("Error: No valid data found.")
+            strTemp = '--°C'
+            strHumi = '--%'
+        else:
+            strTemp = '%2d°C' % dicData.get('temperature', 99)
+            strHumi = '%2d%%' % dicData.get('humidity', 0)
+                
         GLOB.setUpdateTime()
         
         strTime = '%s:%s:%s' % (COM.gHH, COM.gNN, COM.gSS)        
         matrix.SetImage(imgTimer, 0, 0)  # 이미지 위치 (0, 0)
         graphics.DrawText(matrix, font, 16, 11, time_text_color, '현재시각')  # 텍스트 출력
-        graphics.DrawText(matrix, font, 0, 28, temp_text_color, strTime)  # 텍스트 출력
+        graphics.DrawText(matrix, font, 10, 28, temp_text_color, strTime)  # 텍스트 출력
         
         time.sleep(4.5)  # 50ms 대기
         matrix.Clear()  # 화면 초기화
@@ -64,14 +74,6 @@ try:
         time.sleep(4.5)  # 50ms 대기
         matrix.Clear()  # 화면 초기화
         
-        dicData = GLOB.loadJsonFileToDic(COM.gJsonDir+sensor_id+'.json')
-        if not dicData:  # 데이터가 비어 있는 경우
-            print("Error: No valid data found.")
-            strTemp = '--°C'
-            strHumi = '--%'
-        else:
-            strTemp = '%2d°C' % dicData.get('temperature', 99)
-            strHumi = '%2d%%' % dicData.get('humidity', 0)
         
         
 except KeyboardInterrupt:
