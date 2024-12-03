@@ -33,9 +33,10 @@ try:
         matrix.Clear()  # 화면 초기화
         # 이미지를 매트릭스에 출력
         matrix.SetImage(image, 0, 0)  # 이미지 위치 (0, 0)
+        graphics.DrawText(matrix, font, 16, 4, text_color, '온도')  # 텍스트 출력
         
-        len = graphics.DrawText(matrix, font, pos, 16, text_color, message)  # 텍스트 출력
-        pos -= 1  # 텍스트 이동 (왼쪽으로 스크롤)
+        #len = graphics.DrawText(matrix, font, pos, 16, text_color, message)  # 텍스트 출력
+        #pos -= 1  # 텍스트 이동 (왼쪽으로 스크롤)
         
         if pos + len < 0:  # 텍스트가 화면에서 완전히 사라지면
             pos = matrix.width  # 다시 오른쪽 끝으로 이동
