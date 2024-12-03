@@ -10,30 +10,37 @@ options.chain_length = 1  # 체인으로 연결된 패널 수
 options.parallel = 1  # 병렬로 연결된 체인 수
 options.hardware_mapping = 'adafruit-hat'  # GPIO 매핑
 
+# 이미지 함수
+def getImage(path):
+    image = Image.open(path)
+    image = image.resize((16, 16))
+    return image.convert('RGB')    
+
 matrix = RGBMatrix(options=options)
 
 # 텍스트 설정
 font = graphics.Font()
 font.LoadFont("/home/pi/LEDsV2/fonts/gulim_8.bdf")  # 사용할 폰트 경로
-text_color = graphics.Color(255, 0, 0)  # 빨간색 텍스트
+
+temp_text_color = graphics.Color(255, 0, 0)  # 빨간색 텍스트
+humi_text_color = graphics.Color(0, 0, 255)  # 파란색 텍스트
 
 pos = matrix.width  # 텍스트 시작 위치 (오른쪽 끝)
 message = "안녕하세요!"
 
-# PNG 이미지 불러오기
-image_path = "/home/pi/LEDsV2/bin/images/temp.png"  # 사용할 이미지 경로
-image = Image.open(image_path)
-# 이미지 크기를 매트릭스 크기에 맞춤
-image = image.resize((16, 16))  # 매트릭스 크기에 맞게 조정
-# 이미지를 RGB 모드로 변환
-image = image.convert('RGB')
+
+imgTemp = getImage('/home/pi/LEDsV2/bin/images/temp.png')
+imgHumi = getImage('/home/pi/LEDsV2/bin/images/humi.png')
 
 try:
     while True:
         matrix.Clear()  # 화면 초기화
         # 이미지를 매트릭스에 출력
-        matrix.SetImage(image, 0, 0)  # 이미지 위치 (0, 0)
-        graphics.DrawText(matrix, font, 16, 10, text_color, '온도')  # 텍스트 출력
+        matrix.SetImage(imgTemp, 0, 0)  # 이미지 위치 (0, 0)
+        graphics.DrawText(matrix, font, 16, 10, temp_text_color, '온도')  # 텍스트 출력
+        
+        matrix.SetImage(imgHumi, 0, 16)  # 이미지 위치 (0, 0)
+        graphics.DrawText(matrix, font, 16, 20, humi_text_color, '습도')  # 텍스트 출력
         
         #len = graphics.DrawText(matrix, font, pos, 16, text_color, message)  # 텍스트 출력
         #pos -= 1  # 텍스트 이동 (왼쪽으로 스크롤)
