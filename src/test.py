@@ -46,7 +46,7 @@ try:
     while True:
         GLOB.setUpdateTime()
         
-        strTime = '%2d:%2d:%2d' % (COM.gHH, COM.gNN, COM.gSS)        
+        strTime = '%s:%s:%s' % (COM.gHH, COM.gNN, COM.gSS)        
         matrix.SetImage(imgTimer, 0, 0)  # 이미지 위치 (0, 0)
         graphics.DrawText(matrix, font, 16, 11, time_text_color, '현재시각')  # 텍스트 출력
         graphics.DrawText(matrix, font, 0, 28, temp_text_color, strTime)  # 텍스트 출력
