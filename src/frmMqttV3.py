@@ -40,10 +40,13 @@ def on_message(client, userdata, message):
         sensor_id = topic_parts[3]
         print(f"Sensor ID: {sensor_id}")
         # JSON 파일로 메시지 저장
-        json_data = json.loads(message_payload)
-        with open(f"{COM.gJsonDir}/{sensor_id}.json", "w") as json_file:
-            json.dump(json_data, json_file, indent=4)
-        print(f"Message saved to {sensor_id}.json")
+        try:
+            json_data = json.loads(message_payload)
+            with open(f"{COM.gJsonDir}/{sensor_id}.json", "w") as json_file:
+                json.dump(json_data, json_file, indent=4)
+            print(f"Message saved to {sensor_id}.json")
+        except Exception as e :
+            print("[ERROR]: %s" % e)            
     
 
 # MQTT 클라이언트 생성
