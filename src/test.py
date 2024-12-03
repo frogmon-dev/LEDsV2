@@ -14,7 +14,7 @@ matrix = RGBMatrix(options=options)
 
 # 텍스트 설정
 font = graphics.Font()
-font.LoadFont("/home/pi/rpi-rgb-led-matrix/fonts/gulim.bdf")  # 사용할 폰트 경로
+font.LoadFont("/home/pi/LEDsV2/fonts/gulim.bdf")  # 사용할 폰트 경로
 text_color = graphics.Color(255, 0, 0)  # 빨간색 텍스트
 
 pos = matrix.width  # 텍스트 시작 위치 (오른쪽 끝)
