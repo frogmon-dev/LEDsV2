@@ -14,7 +14,6 @@ from frogmon.uCommon import COM
 from frogmon.uGlobal import GLOB
 
 configFileNM = COM.gHomeDir + COM.gSetupFile
-controlFileNM = COM.gHomeDir + COM.gControlFile
 
 mSvr_addr = GLOB.readConfig(configFileNM, 'MQTT', 'host_addr', 'frogmon.synology.me')
 mSvr_port = GLOB.readConfig(configFileNM, 'MQTT', 'host_port', '8359')

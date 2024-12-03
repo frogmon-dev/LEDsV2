@@ -33,6 +33,21 @@ class GLOB:
         data = ''.join(f.read().split())
         f.close()
         return data
+    
+    def loadJsonFileToDic(fileName: str):
+        try:
+            if not os.path.exists(fileName):  # 파일 존재 여부 확인
+                print(f"File '{fileName}' does not exist.")
+                return {}  # 빈 딕셔너리 반환
+            
+            with open(fileName, 'r') as f:
+                data = json.load(f)  # JSON 파일 읽기
+            
+            return data  # 딕셔너리 반환
+
+        except json.JSONDecodeError:  # JSON 파싱 에러 처리
+            print(f"File '{fileName}' is not a valid JSON file or is empty.")
+            return {}  # 빈 딕셔너리 반환
 
     def setUpdateTime():
         COM.gNOW  = datetime.now()

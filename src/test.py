@@ -1,6 +1,8 @@
 from rgbmatrix import RGBMatrix, RGBMatrixOptions, graphics
 from PIL import Image
 import time
+from frogmon.uCommon     import COM
+from frogmon.uGlobal     import GLOB
 
 # 매트릭스 설정
 options = RGBMatrixOptions()
@@ -28,10 +30,14 @@ humi_text_color = graphics.Color(0, 0, 255)  # 파란색 텍스트
 pos = matrix.width  # 텍스트 시작 위치 (오른쪽 끝)
 message = "안녕하세요!"
 
-
 imgTemp = getImage('/home/pi/LEDsV2/bin/images/temp.png')
 imgHumi = getImage('/home/pi/LEDsV2/bin/images/humi.png')
 
+configFileNM = COM.gHomeDir + COM.gSetupFile
+sensor_id = GLOB.readConfig(configFileNM, 'SENSOR', 'id', '0')
+
+strTemp = '--°C'
+strHumi = '--%'
 try:
     while True:
         matrix.Clear()  # 화면 초기화
@@ -39,22 +45,18 @@ try:
         matrix.SetImage(imgTemp, 0, 0)  # 이미지 위치 (0, 0)
         graphics.DrawText(matrix, font, 14, 11, temp_text_color, '온도:')  # 텍스트 출력
         
-        strTemp = '%2d°C' % 19        
         graphics.DrawText(matrix, font, 40, 12, temp_text_color, strTemp)  
         
         matrix.SetImage(imgHumi, 0, 16)  # 이미지 위치 (0, 0)
         graphics.DrawText(matrix, font, 14, 27, humi_text_color, '습도:')  # 텍스트 출력
         
-        strHumi = '%2d%%' % 19
         graphics.DrawText(matrix, font, 40, 28, humi_text_color, strHumi)  # 텍스트 출력
         
-        #len = graphics.DrawText(matrix, font, pos, 16, text_color, message)  # 텍스트 출력
-        #pos -= 1  # 텍스트 이동 (왼쪽으로 스크롤)
+        time.sleep(1)  # 50ms 대기
+        dicData = GLOB.loadJsonFileToDic(COM.gJsonDir+sensor_id+'.json')
+        strTemp = '%2d°C' % dicData['temperature', 99]
+        strHumi = '%2d%%' % dicData['humidity', 0]        
         
-        #if pos + len < 0:  # 텍스트가 화면에서 완전히 사라지면
-        #    pos = matrix.width  # 다시 오른쪽 끝으로 이동
-        
-        time.sleep(0.05)  # 50ms 대기
 except KeyboardInterrupt:
     print("종료합니다.")
     matrix.Clear()
