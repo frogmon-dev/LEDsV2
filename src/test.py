@@ -27,11 +27,15 @@ font.LoadFont("/home/pi/LEDsV2/fonts/gulim_8.bdf")  # 사용할 폰트 경로
 temp_text_color = graphics.Color(255, 0, 0)  # 빨간색 텍스트
 humi_text_color = graphics.Color(0, 0, 255)  # 파란색 텍스트
 
+time_text_color = graphics.Color(255, 255, 0)  # 노란색 텍스트
+
+
 pos = matrix.width  # 텍스트 시작 위치 (오른쪽 끝)
 message = "안녕하세요!"
 
-imgTemp = getImage('/home/pi/LEDsV2/bin/images/temp.png')
-imgHumi = getImage('/home/pi/LEDsV2/bin/images/humi.png')
+imgTemp  = getImage('/home/pi/LEDsV2/bin/images/temp.png')
+imgHumi  = getImage('/home/pi/LEDsV2/bin/images/humi.png')
+imgTimer = getImage('/home/pi/LEDsV2/bin/images/timer.png')
 
 configFileNM = COM.gHomeDir + COM.gSetupFile
 sensor_id = GLOB.readConfig(configFileNM, 'SENSOR', 'id', '0')
@@ -40,19 +44,24 @@ strTemp = '--°C'
 strHumi = '--%'
 try:
     while True:
+        GLOB.setUpdateTime()
+        
+        matrix.SetImage(imgTimer, 0, 0)  # 이미지 위치 (0, 0)
+        graphics.DrawText(matrix, font, 14, 11, time_text_color, '현재시각')  # 텍스트 출력
+        
+        time.sleep(4.5)  # 50ms 대기
         matrix.Clear()  # 화면 초기화
-        # 이미지를 매트릭스에 출력
+        # 온도 습도
         matrix.SetImage(imgTemp, 0, 0)  # 이미지 위치 (0, 0)
         graphics.DrawText(matrix, font, 14, 11, temp_text_color, '온도:')  # 텍스트 출력
-        
         graphics.DrawText(matrix, font, 40, 12, temp_text_color, strTemp)  
-        
         matrix.SetImage(imgHumi, 0, 16)  # 이미지 위치 (0, 0)
         graphics.DrawText(matrix, font, 14, 27, humi_text_color, '습도:')  # 텍스트 출력
-        
         graphics.DrawText(matrix, font, 40, 28, humi_text_color, strHumi)  # 텍스트 출력
         
-        time.sleep(1)  # 50ms 대기
+        time.sleep(4.5)  # 50ms 대기
+        matrix.Clear()  # 화면 초기화
+        
         dicData = GLOB.loadJsonFileToDic(COM.gJsonDir+sensor_id+'.json')
         if not dicData:  # 데이터가 비어 있는 경우
             print("Error: No valid data found.")
@@ -61,6 +70,7 @@ try:
         else:
             strTemp = '%2d°C' % dicData.get('temperature', 99)
             strHumi = '%2d%%' % dicData.get('humidity', 0)
+        
         
 except KeyboardInterrupt:
     print("종료합니다.")
