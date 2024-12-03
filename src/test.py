@@ -39,12 +39,14 @@ try:
         matrix.SetImage(imgTemp, 0, 0)  # 이미지 위치 (0, 0)
         graphics.DrawText(matrix, font, 16, 10, temp_text_color, '온도:')  # 텍스트 출력
         
-        graphics.DrawText(matrix, font, 40, 10, temp_text_color, '%2d°C'%9)  
+        strTemp = '%2d°C'%9        
+        graphics.DrawText(matrix, font, 40, 10, temp_text_color, strTemp)  
         
         matrix.SetImage(imgHumi, 0, 16)  # 이미지 위치 (0, 0)
         graphics.DrawText(matrix, font, 16, 28, humi_text_color, '습도:')  # 텍스트 출력
         
-        graphics.DrawText(matrix, font, 40, 28, humi_text_color, '%2d%'%9)  # 텍스트 출력
+        strHumi = '%2d%'%9
+        graphics.DrawText(matrix, font, 40, 28, humi_text_color, strHumi)  # 텍스트 출력
         
         #len = graphics.DrawText(matrix, font, pos, 16, text_color, message)  # 텍스트 출력
         #pos -= 1  # 텍스트 이동 (왼쪽으로 스크롤)
