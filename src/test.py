@@ -33,7 +33,7 @@ try:
         matrix.Clear()  # 화면 초기화
         # 이미지를 매트릭스에 출력
         matrix.SetImage(image, 0, 0)  # 이미지 위치 (0, 0)
-        graphics.DrawText(matrix, font, 16, 4, text_color, '온도')  # 텍스트 출력
+        graphics.DrawText(matrix, font, 16, 10, text_color, '온도')  # 텍스트 출력
         
         #len = graphics.DrawText(matrix, font, pos, 16, text_color, message)  # 텍스트 출력
         #pos -= 1  # 텍스트 이동 (왼쪽으로 스크롤)
