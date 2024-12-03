@@ -56,10 +56,9 @@ try:
                 
         GLOB.setUpdateTime()
         
-        strTime = '%s:%s:%s' % (COM.gHH, COM.gNN, COM.gSS)        
         matrix.SetImage(imgTimer, 0, 0)  # 이미지 위치 (0, 0)
         graphics.DrawText(matrix, font, 16, 11, time_text_color, '현재시각')  # 텍스트 출력
-        graphics.DrawText(matrix, font, 10, 28, temp_text_color, strTime)  # 텍스트 출력
+        graphics.DrawText(matrix, font, 10, 28, temp_text_color, COM.gStrTime)  # 텍스트 출력
         
         time.sleep(4.5)  # 50ms 대기
         matrix.Clear()  # 화면 초기화

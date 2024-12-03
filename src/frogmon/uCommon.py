@@ -26,6 +26,7 @@ class COM:
 	gstrYMD    = datetime.now().strftime('%Y%m%d')
 	gstrYMDHMS = datetime.now().strftime('%Y%m%d%H%M%S')
 	gstrDATE   = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+	gStrTime   = datetime.now().strftime('%H:%M:%S')
 	
 	gNOW  = datetime.now()
 	

@@ -59,8 +59,8 @@ class GLOB:
         COM.gSS   = COM.gNOW.strftime('%S')
         COM.gstrYMD = COM.gNOW.strftime('%Y%m%d')
         COM.gstrYMDHMS = COM.gNOW.strftime('%Y%m%d%H%M%S')
-        COM.gstrDATE = COM.gNOW.strftime('%Y-%m-%d %H:%M:%S')
-        
+        COM.gstrDATE   = COM.gNOW.strftime('%Y-%m-%d %H:%M:%S')
+        COM.gStrTime   = COM.gNOW.strftime('%H:%M:%S')
 
     def betweenNow(strTm: str):
         convert_date = datetime.strptime(strTm, '%Y%m%d%H%M%S')
