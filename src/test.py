@@ -24,6 +24,9 @@ matrix = RGBMatrix(options=options)
 font = graphics.Font()
 font.LoadFont("/home/pi/LEDsV2/fonts/gulim_8.bdf")  # 사용할 폰트 경로
 
+timeFont = graphics.Font()
+timeFont.LoadFont("/home/pi/LEDsV2/fonts/gulim.bdf")  # 사용할 폰트 경로
+
 temp_text_color = graphics.Color(255, 0, 0)  # 빨간색 텍스트
 humi_text_color = graphics.Color(0, 0, 255)  # 파란색 텍스트
 
@@ -58,7 +61,7 @@ try:
         
         matrix.SetImage(imgTimer, 0, 0)  # 이미지 위치 (0, 0)
         graphics.DrawText(matrix, font, 16, 11, time_text_color, '현재시각')  # 텍스트 출력
-        graphics.DrawText(matrix, font, 10, 28, temp_text_color, COM.gStrTime)  # 텍스트 출력
+        graphics.DrawText(matrix, timeFont, 10, 26, temp_text_color, COM.gStrTime)  # 텍스트 출력
         
         time.sleep(4.5)  # 50ms 대기
         matrix.Clear()  # 화면 초기화
@@ -72,8 +75,6 @@ try:
         
         time.sleep(4.5)  # 50ms 대기
         matrix.Clear()  # 화면 초기화
-        
-        
         
 except KeyboardInterrupt:
     print("종료합니다.")
