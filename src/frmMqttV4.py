@@ -39,7 +39,8 @@ dev_id = read_config_or_default('AGENT', 'id', '0')
 # MQTT 토픽 설정
 MQTT_TOPIC = f"FARMs/Status/{user_id}/#"
 MQTT_PUB_TOPIC = f"FARMs/Control/{user_id}/{dev_id}"
-MQTT_PUB_TOPIC_STATUS = f"FARMs/Status/{user_id}/{dev_id}"
+
+
 
 # 메시지 저장 함수
 def save_message_as_json(sensor_id, message_payload):
@@ -82,15 +83,11 @@ def connect_with_retry(client, broker, port, max_retries=5):
     print("[ERROR] Exceeded maximum connection attempts")
     exit()
 
-# 1분마다 메시지 발행
-def publish_every_minute(client, topic):
-    payload = {"house system": "on"}
-    try:
-        client.publish(topic, json.dumps(payload))
-        print(f"Published: {payload} to topic {topic}")
-    except Exception as e:
-        print(f"[ERROR] Failed to publish message: {e}")
-    threading.Timer(60, publish_every_minute, args=(client, topic)).start()
+# 1분마다 메시지 출력
+def print_every_minute():
+    print("1 minute")
+    user_id
+    threading.Timer(60, print_every_minute).start()
 
 # MQTT 클라이언트 설정 및 실행
 def main():
@@ -107,8 +104,15 @@ def main():
     client.subscribe(MQTT_TOPIC)
     print(f"Subscribed to topic: {MQTT_TOPIC}")
 
-    # 1분마다 메시지 발행 시작
-    publish_every_minute(client, MQTT_PUB_TOPIC_STATUS)
+    # 1분마다 메시지 발행
+    def publish_every_minute(client, topic):
+        payload = {"house system": "systemOn"}
+        try:
+            client.publish(topic, json.dumps(payload))
+            print(f"Published: {payload} to topic {topic}")
+        except Exception as e:
+            print(f"[ERROR] Failed to publish message: {e}")
+        threading.Timer(60, publish_every_minute, args=(client, topic)).start()
 
     # 메시지 루프 시작
     try:
