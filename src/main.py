@@ -46,8 +46,7 @@ sensor_id = GLOB.readConfig(configFileNM, 'SENSOR', 'id', '0')
 strTemp = '--°C'
 strHumi = '--%'
 try:
-    while True:
-        
+    while True:        
         dicData = GLOB.loadJsonFileToDic(COM.gJsonDir+sensor_id+'.json')
         if not dicData:  # 데이터가 비어 있는 경우
             print("Error: No valid data found.")
